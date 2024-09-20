@@ -16,13 +16,13 @@ const TimelineItem: React.FC<TimelineItem> = ({ year, title, description, image 
         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z" clipRule="evenodd" />
       </svg>
     </div>
-    <div className="timeline-start md:text-end mb-10">
+    <div className="timeline-start">
+      <Image src={image} alt={title} width={64} height={64} />
+    </div>
+    <div className="timeline-end mb-10">
       <time className="font-mono italic">{year}</time>
       <div className="text-lg font-black">{title}</div>
       {description}
-    </div>
-    <div className="timeline-end mb-10">
-      <Image src={image} alt={title} width={200} height={200} className="w-16 h-16 object-contain" />
     </div>
     <hr/>
   </li>
@@ -40,7 +40,7 @@ const Timeline: React.FC = () => {
       year: '2020 - 2021',
       title: 'Graduate Software Engineer at NETbuilder',
       description: 'Developed Splunk applications, creating data visualizations, dashboards and data pipelines. Data manipulation and streaming with python.',
-      image: "/nb.jpg",
+      image: "/nb.png",
     },
     {
       year: '2017 - 2020',
