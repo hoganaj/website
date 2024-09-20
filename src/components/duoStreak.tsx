@@ -5,12 +5,13 @@ import Image from "next/image";
 const DuoStreak: React.FC = () => {
   async function getDuolingoStreak(username: string): Promise<any>{
     try {
-      const response = await fetch(`https://www.duolingo.com/2017-06-30/users?username=${username}`)
+      const response = await fetch(`https://www.duolingo.com/2017-06-30/users?username=${username}&_=${Date.now()}`)
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.json();
       const streak = data.users[0].streak;
+      console.log(streak);
       return streak
     } catch (error) {
       console.error("There was a problem with the fetch operation:", error);
