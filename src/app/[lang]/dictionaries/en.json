@@ -1,0 +1,33 @@
+{
+  "header": {
+    "home": "Home",
+    "about": "About",
+    "blog": "Blog"
+  },
+  "footer": "All rights reserved.",
+  "home": {
+    "title": "Hey! I'm Aidan",
+    "job": "Software Engineer",
+    "location": "Leicester, UK",
+    "skills": "Skills: TypeScript, React, Node.js",
+    "hobbies": "Hobbies: Coding, Pickleball, Hiking"
+  },
+  "about": {
+    "intro": "Lucky you! You have found my corner of the internet! This is an informal place to introduce myself, showcase my career experience, projects and anything that piques my interest worthy of sharing.",
+    "uni": {
+      "title": "BSc Computer Science",
+      "desc": "First Class with honors from University of Sheffield"
+    },
+    "netbuilder": {
+      "title": "Graduate Software Engineer at NETbuilder",
+      "desc": "Developed Splunk applications, creating data visualizations, dashboards and data pipelines. Data manipulation and streaming with python."
+    },
+    "gfk": {
+      "title": "Software Engineer at GfK/NIQ",
+      "desc": "Building applications for GfK Boutique and NIQ Financial Services. Tech stack: TypeScript, React, Node, PostgreSQL"
+    }
+  },
+  "blog": {
+    "title": "Blog"
+  }
+}

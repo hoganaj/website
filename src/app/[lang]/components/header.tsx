@@ -4,7 +4,7 @@ import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import { IoSunnyOutline, IoMoonOutline, IoMenuOutline, IoCloseOutline } from "react-icons/io5";
 
-const Header = () => {
+const Header = ({ dictionary, lang }: { dictionary: { [key: string]: string }; lang: string }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
@@ -38,9 +38,9 @@ const Header = () => {
               <IoMenuOutline className="h-5 w-5" />
             </label>
             <ul className="menu menu-horizontal px-1 hidden lg:flex">
-              <li><Link href="/">Home</Link></li>
-              <li><Link href="/about">About</Link></li>
-              <li><Link href="/blog">Blog</Link></li>
+              <li><Link href={`/${lang}`}>{dictionary.home}</Link></li>
+              <li><Link href={`/${lang}/about`}>{dictionary.about}</Link></li>
+              <li><Link href={`/${lang}/blog`}>{dictionary.blog}</Link></li>
             </ul>
           </div>
           <div className="navbar-center">
@@ -67,9 +67,9 @@ const Header = () => {
               <IoCloseOutline className="h-5 w-5" />
             </label>
           </li>
-          <li><Link href="/">Home</Link></li>
-          <li><Link href="/about">About</Link></li>
-          <li><Link href="/blog">Blog</Link></li>
+          <li><Link href={`/${lang}`}>{dictionary.home}</Link></li>
+          <li><Link href={`/${lang}/about`}>{dictionary.about}</Link></li>
+          <li><Link href={`/${lang}/blog`}>{dictionary.blog}</Link></li>
         </ul>
       </div>
     </div>

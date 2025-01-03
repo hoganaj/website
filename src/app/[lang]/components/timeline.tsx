@@ -28,24 +28,24 @@ const TimelineItem: React.FC<TimelineItem> = ({ year, title, description, image 
   </li>
 );
 
-const Timeline: React.FC = () => {
+const Timeline: React.FC<{ dict: Dictionary }> = ({ dict }) => {
   const experiences: TimelineItem[] = [
     {
       year: '2021 - Present',
-      title: 'Software Engineer at GfK/NIQ',
-      description: 'Building applications for GfK Boutique and NIQ Financial Services. Tech stack: TypeScript, React, Node, PostgreSQL ',
+      title: dict.about.gfk.title,
+      description: dict.about.gfk.desc,
       image: "/GfK.png",
     },
     {
       year: '2020 - 2021',
-      title: 'Graduate Software Engineer at NETbuilder',
-      description: 'Developed Splunk applications, creating data visualizations, dashboards and data pipelines. Data manipulation and streaming with python.',
+      title: dict.about.netbuilder.title,
+      description: dict.about.netbuilder.desc,
       image: "/nb.png",
     },
     {
       year: '2017 - 2020',
-      title: 'BSc Computer Science',
-      description: 'First Class with honors from University of Sheffield',
+      title: dict.about.uni.title,
+      description: dict.about.uni.desc,
       image: "/UoS.svg",
     },
   ];

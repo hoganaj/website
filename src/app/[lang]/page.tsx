@@ -1,8 +1,17 @@
 /* eslint-disable react/no-unescaped-entities */
 import Image from "next/image";
-import { FaLaptopCode, FaMapMarkerAlt, FaBriefcase, FaTools, FaSmile } from "react-icons/fa";
+import { FaLaptopCode, FaMapMarkerAlt, FaTools, FaSmile } from "react-icons/fa";
+import { getDictionary } from "./dictionaries";
 
-export default function Home() {
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ lang: 'en' | 'zh' }>
+}) {
+
+  const lang = (await params).lang
+  const dict = await getDictionary(lang)
+
   return (
     <main className="container mx-auto px-6 sm:px-4 py-8">
       <div className="text-center">
@@ -14,26 +23,26 @@ export default function Home() {
             height={200}
             className="mx-auto mb-6 w-32 h-32 sm:w-48 sm:h-48"
           />
-          <h1 className="text-3xl md:text-5xl font-bold text-base-content">Hey! I&apos;m Aidan</h1>
+          <h1 className="text-3xl md:text-5xl font-bold text-base-content">{dict.home.title}</h1>
         </div>
 
         {/* Mobile-Friendly Section */}
         <div className="md:hidden mt-8 space-y-4">
           <div className="flex items-center justify-center space-x-2">
             <FaLaptopCode className="text-blue-500 text-xl" />
-            <p className="text-lg font-semibold">Software Engineer</p>
+            <p className="text-lg font-semibold">{dict.home.job}</p>
           </div>
           <div className="flex items-center justify-center space-x-2">
             <FaMapMarkerAlt className="text-red-500 text-xl" />
-            <p className="text-lg">Leicester, UK</p>
+            <p className="text-lg">{dict.home.location}</p>
           </div>
           <div className="flex items-center justify-center space-x-2">
             <FaTools className="text-green-500 text-xl" />
-            <p className="text-lg">Skills: TypeScript, React, Node.js</p>
+            <p className="text-lg">{dict.home.skills}</p>
           </div>
           <div className="flex items-center justify-center space-x-2">
             <FaSmile className="text-yellow-500 text-xl" />
-            <p className="text-lg">Hobbies: Coding, Pickleball, Hiking</p>
+            <p className="text-lg">{dict.home.hobbies}</p>
           </div>
         </div>
 

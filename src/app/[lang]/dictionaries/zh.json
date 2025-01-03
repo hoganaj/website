@@ -1,0 +1,33 @@
+{
+  "header": {
+    "home": "主页",
+    "about": "关于",
+    "blog": "博客"
+  },
+  "footer": "版权所有。",
+  "home": {
+    "title": "嘿！我是Aidan",
+    "job": "软件工程师",
+    "location": "英国, 莱斯特",
+    "skills": "技能: TypeScript, React, Node.js",
+    "hobbies": "爱好： 编码、匹克球、徒步旅行"
+  },
+  "about": {
+    "intro": "幸运的你！你已经找到了我的互联网角落！这是一个非正式的地方，可以介绍我自己，展示我的职业经验、项目以及任何值得分享的激起我兴趣的东西。",
+    "uni": {
+      "title": "计算机科学理学士",
+      "desc": "谢菲尔德大学一等荣誉学位"
+    },
+    "netbuilder": {
+      "title": "NETbuilder 研究生软件工程师",
+      "desc": "开发 Splunk 应用程序，创建数据可视化、仪表板和数据管道。使用 python 进行数据操作和流式传输。"
+    },
+    "gfk": {
+      "title": "GfK/NIQ 软件工程师",
+      "desc": "为 GfK Boutique 和 NIQ Financial Services 构建应用程序。技术堆栈：TypeScript、React、Node、PostgreSQL"
+    }
+  },
+  "blog": {
+    "title": "博客"
+  }
+}

@@ -1,18 +1,26 @@
-import DuoStreak from '@/components/duoStreak';
-import Timeline from '@/components/timeline';
+import DuoStreak from '@/app/[lang]/components/duoStreak';
+import Timeline from '@/app/[lang]/components/timeline';
 import React from 'react';
+import { getDictionary } from '../dictionaries';
 
-const About: React.FC = () => {
+export default async function About({
+  params,
+}: {
+  params: Promise<{ lang: 'en' | 'zh' }>
+}) {
+
+  const lang = (await params).lang
+  const dict = await getDictionary(lang)
   return (
     <>
       <div className="container mx-auto p-4 flex flex-col items-center">
         <div className="max-w-2xl w-full text-justify mb-8">
           <p>
-            Lucky you! You have found my corner of the internet! This is an informal place to introduce myself, showcase my career experience, projects and anything that piques my interest worthy of sharing.
+            {dict.about.intro}
           </p>
         </div>
         <div className="w-full flex justify-center">
-          <Timeline />
+          <Timeline dict={dict} />
         </div>
         <div className="w-full flex justify-center mt-8">
           <DuoStreak />
@@ -21,5 +29,3 @@ const About: React.FC = () => {
     </>
   );
 };
-
-export default About;

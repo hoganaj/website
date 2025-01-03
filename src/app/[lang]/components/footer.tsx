@@ -1,11 +1,11 @@
 import React from 'react';
 import { FaLinkedin, FaGithub } from 'react-icons/fa';
 
-const Footer = () => {
+const Footer = ({ dictionary }: { dictionary: string }) => {
   return (
     <footer className="flex flex-wrap justify-between items-center p-4 text-neutral-content">
       <div className="flex-grow mr-4 mb-2 sm:mb-0">
-        <p>Copyright © {new Date().getFullYear()} - All right reserved</p>
+        <p>Copyright © {new Date().getFullYear()} - {dictionary}</p>
       </div>
       <nav className="flex flex-wrap items-center gap-4">
         <h6 className="footer-title hover:text-neutral-950 m-0">中文</h6>
