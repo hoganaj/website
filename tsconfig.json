@@ -24,6 +24,6 @@
     "target": "ES2017",
     "typeRoots": ["node_modules/@types", "src/types"]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/i18nConfig.js", "src/i18nConfig.js"],
   "exclude": ["node_modules"]
 }

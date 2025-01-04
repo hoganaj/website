@@ -5,6 +5,8 @@ import Footer from "@/app/[lang]/components/footer";
 import Header from "@/app/[lang]/components/header";
 import { getDictionary } from "./dictionaries";
 import React from "react";
+import { notFound } from "next/navigation";
+import i18nConfig from "@/i18nConfig";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,6 +22,9 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { lang: "en" | "zh" };
 }>) {
+  if (!i18nConfig.locales.includes(lang)) {
+    notFound();
+  }
   const dictionary = await getDictionary(lang);
 
   return (
@@ -29,7 +34,7 @@ export default async function RootLayout({
         <main className="flex-grow">
           {children}
         </main>
-        <Footer dictionary={dictionary.footer} />
+        <Footer dictionary={dictionary.footer} lang={lang}/>
       </body>
     </html>
   );

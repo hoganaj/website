@@ -1,15 +1,26 @@
 import { NextResponse } from 'next/server';
+import { i18nRouter } from 'next-i18n-router';
+import i18nConfig from './i18nConfig';
+import { NextRequest } from 'next/server';
 
-export function middleware(req: { url?: any; nextUrl?: any; headers?: any; }) {
-  const { nextUrl, headers } = req;
-  const acceptLanguage = headers.get('accept-language') || 'en'; // Default to 'en' if undefined
-  const locale = nextUrl.locale || acceptLanguage.split(',')[0].split('-')[0]; // Extract base language
-  const supportedLocales = ['en', 'zh']; // Add your supported locales here
-
-  // Redirect to the supported locale if not already set
-  if (!supportedLocales.includes(locale)) {
-    return NextResponse.redirect(new URL(`/en${nextUrl.pathname}`, req.url));
+export function middleware(request: NextRequest) {
+  const pathname = request.nextUrl.pathname;
+  
+  // Check if we're at root and have a NEXT_LOCALE cookie
+  if (pathname === '/') {
+    const localeCookie = request.cookies.get('NEXT_LOCALE');
+    
+    // If we have a non-default locale cookie at root path, reset it to default
+    if (localeCookie && localeCookie.value !== i18nConfig.defaultLocale) {
+      const response = NextResponse.redirect(new URL('/', request.url));
+      response.cookies.set('NEXT_LOCALE', i18nConfig.defaultLocale);
+      return response;
+    }
   }
-
-  return NextResponse.next();
+  
+  return i18nRouter(request, i18nConfig);
 }
+
+export const config = {
+  matcher: ['/((?!api|static|_next|_vercel|.*\\..*).*)', '/']
+};
