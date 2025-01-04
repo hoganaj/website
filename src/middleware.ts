@@ -5,6 +5,11 @@ import { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
+
+  // Skip middleware for studio routes
+  if (pathname.startsWith('/studio')) {
+    return NextResponse.next();
+  }
   
   // Check if we're at root and have a NEXT_LOCALE cookie
   if (pathname === '/') {
