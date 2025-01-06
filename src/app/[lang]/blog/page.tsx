@@ -6,6 +6,7 @@ import { getDictionary } from "../dictionaries";
 const POSTS_QUERY = `*[
   _type == "post"
   && defined(slug.current)
+  && language == $lang
 ]|order(publishedAt desc)[0...12]{_id, title, slug, publishedAt}`;
 
 const options = { next: { revalidate: 30 } };
@@ -18,7 +19,7 @@ export default async function Blog({
   const lang = (await params).lang
   const dict = await getDictionary(lang)
   
-  const posts = await client.fetch<SanityDocument[]>(POSTS_QUERY, {}, options);
+  const posts = await client.fetch<SanityDocument[]>(POSTS_QUERY, { lang }, options);
 
   return (
     <main className="container mx-auto min-h-screen max-w-3xl p-8">

@@ -4,8 +4,9 @@ import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { client } from "@/sanity/lib/client";
 import Link from "next/link";
 import Image from "next/image";
+import { getDictionary } from "../../dictionaries";
 
-const POST_QUERY = `*[_type == "post" && slug.current == $slug][0]`;
+const POST_QUERY = `*[_type == "post" && slug.current == $slug && language == $lang][0]`;
 
 const { projectId, dataset } = client.config();
 const urlFor = (source: SanityImageSource) =>
@@ -18,8 +19,12 @@ const options = { next: { revalidate: 30 } };
 export default async function PostPage({
   params,
 }: {
-  params: { slug: string };
+  params: { slug: string; lang: "en" | "zh"  };
 }) {
+
+  const lang = (await params).lang
+  const dict = await getDictionary(lang)
+  
   const post = await client.fetch<SanityDocument>(POST_QUERY, params, options);
 
   const postImageUrl = post.image
@@ -29,7 +34,7 @@ export default async function PostPage({
   return (
     <main className="container mx-auto min-h-screen max-w-3xl p-8 flex flex-col gap-4">
       <Link href="/blog" className="hover:underline">
-        ← Back to posts
+        {dict.blog.back}
       </Link>
       {postImageUrl && (
         <Image
