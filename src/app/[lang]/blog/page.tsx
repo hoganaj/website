@@ -22,7 +22,7 @@ export default async function Blog({
   const posts = await client.fetch<SanityDocument[]>(POSTS_QUERY, { lang }, options);
 
   return (
-    <main className="container mx-auto min-h-screen max-w-3xl p-8">
+    <main className="container mx-auto max-w-3xl p-8">
       <h1 className="text-4xl font-bold mb-8">{dict.blog.title}</h1>
       <ul className="flex flex-col gap-y-4">
         {posts.map((post) => (
