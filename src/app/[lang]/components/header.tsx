@@ -68,7 +68,7 @@ const Header = ({ dictionary, lang }: { dictionary: { [key: string]: string }; l
           </div>
         </div>
       </div> 
-      <div className="drawer-side">
+      <div className="drawer-side z-50">
         <label htmlFor="my-drawer" className="drawer-overlay"></label>
         <ul className="menu p-4 w-80 h-full bg-base-200">
           <li className="mb-2">
@@ -76,9 +76,9 @@ const Header = ({ dictionary, lang }: { dictionary: { [key: string]: string }; l
               <IoCloseOutline className="h-5 w-5" />
             </label>
           </li>
-          <li><Link href={`/${lang}`}>{dictionary.home}</Link></li>
-          <li><Link href={`/${lang}/about`}>{dictionary.about}</Link></li>
-          <li><Link href={`/${lang}/blog`}>{dictionary.blog}</Link></li>
+          <li onClick={toggleDrawer}><Link href={`/${lang}`}>{dictionary.home}</Link></li>
+          <li onClick={toggleDrawer}><Link href={`/${lang}/about`}>{dictionary.about}</Link></li>
+          <li onClick={toggleDrawer}><Link href={`/${lang}/blog`}>{dictionary.blog}</Link></li>
         </ul>
       </div>
     </div>
