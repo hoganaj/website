@@ -3,18 +3,27 @@
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import { IoSunnyOutline, IoMoonOutline, IoMenuOutline, IoCloseOutline } from "react-icons/io5";
+import { getStoredTheme, setStoredTheme } from '@/utils/themeUtils';
 
 const Header = ({ dictionary, lang }: { dictionary: { [key: string]: string }; lang: string }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   useEffect(() => {
-    const defaultTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    setTheme(defaultTheme);
+    const initializeTheme = () => {
+      const storedTheme = getStoredTheme();
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      
+      // Use stored theme if available, otherwise use system preference
+      const theme = storedTheme || (prefersDark ? 'dark' : 'light');
+      setTheme(theme);
+    };
+
+    initializeTheme();
   }, []);
 
   const setTheme = (theme: string) => {
-    document.documentElement.setAttribute('data-theme', theme);
+    setStoredTheme(theme);
     setIsDarkMode(theme === 'dark');
   };
 

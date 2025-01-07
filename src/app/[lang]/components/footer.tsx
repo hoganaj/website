@@ -1,5 +1,6 @@
 'use client';
 import i18nConfig from '@/i18nConfig';
+import { getStoredTheme } from '@/utils/themeUtils';
 import { usePathname, useRouter } from 'next/navigation';
 import React from 'react';
 import { FaLinkedin, FaGithub } from 'react-icons/fa';
@@ -11,6 +12,8 @@ const Footer = ({ dictionary, lang }: { dictionary: string; lang: string }) => {
   const currentPathname = usePathname();
   
   const handleLangChange = (newLocale: string) => {
+     // Store current theme before navigation
+     getStoredTheme();
 
     // redirect to the new locale path
     if (
