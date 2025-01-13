@@ -30,5 +30,10 @@
   "blog": {
     "title": "博客",
     "back": "← 返回帖子"
+  },
+  "errors": {
+    "notFound": "未找到",
+    "resourceNotFound": "找不到请求的资源",
+    "returnHome": "返回主页"
   }
 }

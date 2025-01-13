@@ -30,5 +30,10 @@
   "blog": {
     "title": "Blog",
     "back": "← Back to posts"
+  },
+  "errors": {
+    "notFound": "Not Found",
+    "resourceNotFound": "Could not find requested resource",
+    "returnHome": "Return Home"
   }
 }
