@@ -53,8 +53,14 @@ const Header = ({ dictionary, lang }: { dictionary: { [key: string]: string }; l
             </ul>
           </div>
           <div className="navbar-center">
-            <a className="text-xl">Aidan Hogan</a>
+          <div className="flex items-center space-x-2">
+            <div className="text-3xl font-bold text-gradient bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500">
+              Aidan Hogan
+            </div>
+            <span className="text-3xl">🧑‍💻</span>
           </div>
+        </div>
+
           <div className='navbar-end'>
             <label className="swap swap-rotate ml-auto">
               <input
