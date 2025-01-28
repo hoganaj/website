@@ -2,6 +2,25 @@ import Link from "next/link";
 import { type SanityDocument } from "next-sanity";
 import { client } from "@/sanity/lib/client";
 import { getDictionary } from "../dictionaries";
+import type { Metadata } from 'next';
+
+export async function generateMetadata({params}: { params: Promise<{ lang: 'en' | 'zh' }> }): Promise<Metadata | undefined> {
+  const lang = (await params).lang
+  const dict = await getDictionary(lang);
+  
+  return {
+    title: dict.metadata.blog.title,
+    description: dict.metadata.blog.desc,
+    openGraph: {
+      title: dict.metadata.blog.title,
+      description: dict.metadata.blog.desc,
+      type: "website",
+      locale: lang,
+      url: lang === "en" ? "/blog" : `/${lang}/blog`,
+      siteName: "Aidan Hogan",
+    }
+  }
+}
 
 const POSTS_QUERY = `*[
   _type == "post"

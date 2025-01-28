@@ -5,8 +5,48 @@ import { client } from "@/sanity/lib/client";
 import Link from "next/link";
 import Image from "next/image";
 import { getDictionary } from "../../dictionaries";
+import type { Metadata } from 'next';
 
 const POST_QUERY = `*[_type == "post" && slug.current == $slug && language == $lang][0]`;
+
+export async function generateMetadata({params}: Params): Promise<Metadata | undefined> {
+  // const dict = await getDictionary(params.lang);
+  const post = await client.fetch<SanityDocument>(POST_QUERY, params, options);
+  const postImageUrl = post.image
+    ? urlFor(post.image)?.width(1200).height(630).url()
+    : undefined;
+  if (!post) {
+    return;
+  }
+  return {
+    title: post.title,
+    description: "Blog article by Aidan Hogan",
+    openGraph: {
+      title: post.title,
+      description: "Blog article by Aidan Hogan",
+      type: "article",
+      locale: params.lang,
+      url:
+        params.lang === "en"
+          ? `/blog/${params.slug}`
+          : `/${params.lang}/blog/${params.slug}`,
+      siteName: "Aidan Hogan",
+      ...(postImageUrl && 
+        { 
+          images: [
+            {
+              url: postImageUrl,
+              width: 1200,
+              height: 630,
+            }
+          ]
+        }
+      )
+    }
+  }
+}
+
+
 
 const { projectId, dataset } = client.config();
 const urlFor = (source: SanityImageSource) =>
@@ -16,13 +56,16 @@ const urlFor = (source: SanityImageSource) =>
 
 const options = { next: { revalidate: 30 } };
 
-export default async function PostPage({
-  params,
-}: {
-  params: { slug: string; lang: "en" | "zh"  };
-}) {
+interface Params {
+  params: {
+    slug: string,
+    lang: "en" | "zh"
+  }
+}
 
-  const lang = (await params).lang
+export default async function PostPage({ params }: Params) {
+
+  const lang = params.lang
   const dict = await getDictionary(lang)
   
   const post = await client.fetch<SanityDocument>(POST_QUERY, params, options);

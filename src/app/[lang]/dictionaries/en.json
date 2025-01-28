@@ -35,5 +35,23 @@
     "notFound": "Not Found",
     "resourceNotFound": "Could not find requested resource",
     "returnHome": "Return Home"
+  },
+  "metadata": {
+    "layout": {
+      "title": "Aidan Hogan ",
+      "desc": "Website and Blog"
+    },
+    "home": {
+      "title": "Aidan Hogan",
+      "desc": "Welcome to my website"
+    },
+    "about": {
+      "title": "About",
+      "desc": "General information and work experience"
+    },
+    "blog": {
+      "title": "Blog",
+      "desc": "A blog featuring articles on my projects and interests"
+    }
   }
 }

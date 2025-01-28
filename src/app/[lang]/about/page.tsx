@@ -2,6 +2,25 @@ import DuoStreak from '@/app/[lang]/components/duoStreak';
 import Timeline from '@/app/[lang]/components/timeline';
 import React from 'react';
 import { getDictionary } from '../dictionaries';
+import type { Metadata } from 'next';
+
+export async function generateMetadata({params}: { params: Promise<{ lang: 'en' | 'zh' }> }): Promise<Metadata | undefined> {
+  const lang = (await params).lang
+  const dict = await getDictionary(lang);
+  
+  return {
+    title: dict.metadata.about.title,
+    description: dict.metadata.about.desc,
+    openGraph: {
+      title: dict.metadata.about.title,
+      description: dict.metadata.about.desc,
+      type: "website",
+      locale: lang,
+      url: lang === "en" ? "/about" : `/${lang}/about`,
+      siteName: "Aidan Hogan",
+    }
+  }
+}
 
 export default async function About({
   params,

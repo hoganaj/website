@@ -2,6 +2,25 @@
 import Image from "next/image";
 import { FaLaptopCode, FaMapMarkerAlt, FaTools, FaSmile } from "react-icons/fa";
 import { getDictionary } from "./dictionaries";
+import type { Metadata } from 'next';
+
+export async function generateMetadata({params}: { params: Promise<{ lang: 'en' | 'zh' }> }): Promise<Metadata | undefined> {
+  const lang = (await params).lang
+  const dict = await getDictionary(lang);
+  
+  return {
+    title: dict.metadata.home.title,
+    description: dict.metadata.home.desc,
+    openGraph: {
+      title: dict.metadata.home.title,
+      description: dict.metadata.home.desc,
+      type: "website",
+      locale: lang,
+      url: lang === "en" ? "/" : `/${lang}`,
+      siteName: "Aidan Hogan",
+    }
+  }
+}
 
 export default async function Home({
   params,
@@ -27,7 +46,7 @@ export default async function Home({
         </div>
 
         {/* Mobile-Friendly Section */}
-        <div className="md:hidden mt-8 space-y-4">
+        <div className="mt-8 space-y-4">
           <div className="flex items-center justify-center space-x-2">
             <FaLaptopCode className="text-blue-500 text-xl" />
             <p className="text-lg font-semibold">{dict.home.job}</p>
@@ -46,7 +65,7 @@ export default async function Home({
           </div>
         </div>
 
-        {/* Full Code Snippet for Larger Devices */}
+        {/* Full Code Snippet for Larger Devices
         <div className="hidden md:block mockup-code w-full max-w-fit mx-auto mt-6 text-left overflow-x-auto">
           <pre data-prefix="$" className="whitespace-pre text-sm"><code>npm i aidan@latest</code></pre>
           <pre data-prefix=">" className="text-info whitespace-pre text-sm"><code>Initializing Aidan installation...</code></pre>
@@ -57,7 +76,7 @@ export default async function Home({
           <pre data-prefix=">" className="whitespace-pre text-sm"><code>Skills: ['TypeScript', 'React', 'Node.js'] Hobbies: ['Coding', 'Pickleball', 'Hiking']</code></pre>
           <pre data-prefix="$" className="whitespace-pre text-sm"><code>aidan --run greet</code></pre>
           <pre data-prefix=">" className="text-warning whitespace-pre text-sm"><code>Hello, World! Ready to build something awesome?</code></pre>
-        </div>
+        </div> */}
       </div>
     </main>
   );

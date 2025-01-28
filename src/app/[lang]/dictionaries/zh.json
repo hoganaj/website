@@ -35,5 +35,23 @@
     "notFound": "未找到",
     "resourceNotFound": "找不到请求的资源",
     "returnHome": "返回主页"
+  },
+  "metadata": {
+    "layout": {
+      "title": "Aidan Hogan",
+      "desc": "网站和博客"
+    },
+    "home": {
+      "title": "Aidan Hogan",
+      "desc": "欢迎来到我的网站"
+    },
+    "about": {
+      "title": "关于",
+      "desc": "一般信息和工作经验"
+    },
+    "blog": {
+      "title": "博客",
+      "desc": "一个博客，其中包含有关我的项目和兴趣的文章"
+    }
   }
 }

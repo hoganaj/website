@@ -10,10 +10,28 @@ import i18nConfig from "@/i18nConfig";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "Aidan Hogan",
-  description: "Personal Website",
-};
+export async function generateMetadata({ params }: { params: { lang: "en" | "zh" } }): Promise<Metadata> {
+  const lang = params.lang;
+  const dict = await getDictionary(lang);
+  const url = process.env.NEXT_PUBLIC_URL || 'http://localhost:3000';
+
+  return {
+    metadataBase: new URL(url),
+    title: {
+      default: dict.metadata.layout.title,
+      template: "Aidan Hogan | %s",
+    },
+    description: dict.metadata.layout.desc,
+    openGraph: {
+      title: dict.metadata.layout.title,
+      description: dict.metadata.layout.desc,
+      type: "website",
+      locale: lang,
+      url: lang === "en" ? "/" : `/${lang}`,
+      siteName: "Aidan Hogan",
+    },
+  };
+}
 
 export default async function RootLayout({
   children,
