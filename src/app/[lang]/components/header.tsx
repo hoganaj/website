@@ -64,6 +64,7 @@ const Header = ({ dictionary, lang }: { dictionary: { [key: string]: string }; l
           <div className='navbar-end'>
             <label className="swap swap-rotate ml-auto">
               <input
+                id='theme-switch'
                 type="checkbox"
                 checked={isDarkMode}
                 onChange={handleThemeSwitch}
