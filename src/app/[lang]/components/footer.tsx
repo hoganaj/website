@@ -35,7 +35,7 @@ const Footer = ({ dictionary, lang }: { dictionary: string; lang: string }) => {
   return (
     <footer className="flex items-center justify-between px-4 py-3 text-neutral-content">
       <div className="text-sm whitespace-nowrap">
-        <p>Copyright © {new Date().getFullYear()} - {dictionary}</p>
+        <p>© {new Date().getFullYear()} - {dictionary}</p>
       </div>
       <nav className="flex items-center space-x-3">
       <a
