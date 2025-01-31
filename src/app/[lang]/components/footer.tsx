@@ -33,18 +33,18 @@ const Footer = ({ dictionary, lang }: { dictionary: string; lang: string }) => {
   const buttonLabel = currentLocale === 'en' ? '中文' : 'English';
 
   return (
-    <footer className="flex flex-wrap justify-between items-center p-4 text-neutral-content">
-      <div className="flex-grow mr-4 mb-2 sm:mb-0">
+    <footer className="flex items-center justify-between px-4 py-3 text-neutral-content">
+      <div className="text-sm whitespace-nowrap">
         <p>Copyright © {new Date().getFullYear()} - {dictionary}</p>
       </div>
-      <nav className="flex flex-wrap items-center gap-4">
+      <nav className="flex items-center space-x-3">
       <a
           onClick={(e) => {
             e.preventDefault(); // Prevent default anchor behavior
             handleLangChange(otherLocale);
           }}
           href="#"
-          className="footer-title hover:text-neutral-950 m-0 cursor-pointer"
+          className="footer-title hover:text-neutral-950 m-0 cursor-pointer text-sm"
         >
           {buttonLabel}
         </a>
