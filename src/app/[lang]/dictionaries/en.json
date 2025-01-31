@@ -9,11 +9,11 @@
     "title": "Hey! I'm Aidan",
     "job": "Software Engineer",
     "location": "Leicester, UK",
-    "skills": "Skills: TypeScript, React, Node.js",
-    "hobbies": "Hobbies: Coding, Pickleball, Hiking"
+    "stack": "Current Stack: TypeScript, React, Next, Node.js, PostgreSQL, AWS",
+    "hobbies": "Hobbies: Football, Tennis, Badminton, Pickleball, Food, Travel, Technology"
   },
   "about": {
-    "intro": "Lucky you! You have found my corner of the internet! This is an informal place to introduce myself, showcase my career experience, projects and anything that piques my interest worthy of sharing.",
+    "intro": "Welcome to my corner of the internet! This is a space for me to introduce myself, showcase my career experience, projects and anything I find interesting.",
     "uni": {
       "title": "BSc Computer Science",
       "desc": "First Class with honors from University of Sheffield"

@@ -9,11 +9,11 @@
     "title": "嘿！我是Aidan",
     "job": "软件工程师",
     "location": "英国, 莱斯特",
-    "skills": "技能: TypeScript, React, Node.js",
-    "hobbies": "爱好： 编码、匹克球、徒步旅行"
+    "stack": "当前技术栈: TypeScript, React, Next, Node.js, PostgreSQL, AWS",
+    "hobbies": "爱好： 足球、网球、羽毛球、匹克球、美食、旅游、科技"
   },
   "about": {
-    "intro": "幸运的你！你已经找到了我的互联网角落！这是一个非正式的地方，可以介绍我自己，展示我的职业经验、项目以及任何值得分享的激起我兴趣的东西。",
+    "intro": "欢迎来到我的互联网角落！这是一个让我介绍自己、展示我的职业经验、项目和任何我觉得有趣的东西的空间。",
     "uni": {
       "title": "计算机科学理学士",
       "desc": "谢菲尔德大学一等荣誉学位"
