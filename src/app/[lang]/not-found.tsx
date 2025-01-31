@@ -5,7 +5,7 @@ import { headers } from 'next/headers'
 export default async function NotFound() {
   
     // Extract the language from locale header
-    const headersList = headers()
+    const headersList = await headers()
     const lang = (headersList.get('x-next-i18n-router-locale') || "en") as "en" | "zh"
     
     const dictionary = await getDictionary(lang);

@@ -9,7 +9,8 @@ import type { Metadata } from 'next';
 
 const POST_QUERY = `*[_type == "post" && slug.current == $slug && language == $lang][0]`;
 
-export async function generateMetadata({params}: Params): Promise<Metadata | undefined> {
+export async function generateMetadata(props: Params): Promise<Metadata | undefined> {
+  const params = await props.params;
   // const dict = await getDictionary(params.lang);
   const post = await client.fetch<SanityDocument>(POST_QUERY, params, options);
   const postImageUrl = post.image
@@ -57,17 +58,18 @@ const urlFor = (source: SanityImageSource) =>
 const options = { next: { revalidate: 30 } };
 
 interface Params {
-  params: {
+  params: Promise<{
     slug: string,
     lang: "en" | "zh"
-  }
+  }>
 }
 
-export default async function PostPage({ params }: Params) {
+export default async function PostPage(props: Params) {
+  const params = await props.params;
 
   const lang = params.lang
   const dict = await getDictionary(lang)
-  
+
   const post = await client.fetch<SanityDocument>(POST_QUERY, params, options);
 
   const postImageUrl = post.image

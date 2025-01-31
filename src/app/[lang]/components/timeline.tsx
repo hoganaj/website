@@ -23,8 +23,8 @@ const TimelineItem: React.FC<TimelineItem> = ({ year, title, description, image 
         width={64} 
         height={64} 
         className={`${
-          image.includes('UoS') && 'brightness-150'
-        }`}
+          image.includes('UoS') && 'brightness-150 w-16 h-16'
+        }`} 
       />
     </div>
     <div className="timeline-end mb-10">

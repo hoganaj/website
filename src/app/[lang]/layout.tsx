@@ -10,7 +10,8 @@ import i18nConfig from "@/i18nConfig";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export async function generateMetadata({ params }: { params: { lang: "en" | "zh" } }): Promise<Metadata> {
+export async function generateMetadata(props: { params: Promise<{ lang: "en" | "zh" }> }): Promise<Metadata> {
+  const params = await props.params;
   const lang = params.lang;
   const dict = await getDictionary(lang);
   const url = process.env.NEXT_PUBLIC_URL || 'http://localhost:3000';
@@ -33,13 +34,22 @@ export async function generateMetadata({ params }: { params: { lang: "en" | "zh"
   };
 }
 
-export default async function RootLayout({
-  children,
-  params: { lang },
-}: Readonly<{
-  children: React.ReactNode;
-  params: { lang: "en" | "zh" };
-}>) {
+export default async function RootLayout(
+  props: Readonly<{
+    children: React.ReactNode;
+    params: { lang: "en" | "zh" };
+  }>
+) {
+  const params = await props.params;
+
+  const {
+    lang
+  } = params;
+
+  const {
+    children
+  } = props;
+
   if (!i18nConfig.locales.includes(lang)) {
     notFound();
   }
@@ -47,7 +57,7 @@ export default async function RootLayout({
 
   return (
     <html lang={lang}>
-      <body className={`${inter.className} flex flex-col min-h-screen`}>
+      <body className={`${inter.className} flex flex-col min-h-screen`} suppressHydrationWarning>
         <Header dictionary={dictionary.header} lang={lang}/>
         <main className="flex-grow">
           {children}

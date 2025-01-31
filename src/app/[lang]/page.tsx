@@ -38,6 +38,7 @@ export default async function Home({
           <Image
             alt="Avatar"
             src="/avatar.png"
+            priority
             width={200}
             height={200}
             className="mx-auto mb-6 w-32 h-32 sm:w-48 sm:h-48"
