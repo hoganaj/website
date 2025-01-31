@@ -34,7 +34,7 @@ export default async function Home({
   const dict = await getDictionary(lang)
 
   return (
-    <main className="container mx-auto px-6 sm:px-4 py-8">
+    <main className="container mx-auto px-4 py-6 max-w-4xl">
       <div className="text-center">
         <div className="max-w-sm sm:max-w-md mx-auto">
           <Image
@@ -49,7 +49,7 @@ export default async function Home({
         </div>
 
         {/* Mobile-Friendly Section */}
-        <div className="mt-8 flex flex-col items-center gap-4">
+        <div className="mt-6 flex flex-col items-center gap-3">
           {[
             { icon: <FaLaptopCode />, text: dict.home.job, color: "text-blue-400" },
             { icon: <FaMapMarkerAlt />, text: dict.home.location, color: "text-red-400" },

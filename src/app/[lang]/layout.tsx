@@ -57,7 +57,7 @@ export default async function RootLayout(
 
   return (
     <html lang={lang}>
-      <body className={`${inter.className} flex flex-col min-h-screen`} suppressHydrationWarning>
+      <body className={`${inter.className} flex flex-col min-h-screen overflow-x-hidden`} suppressHydrationWarning>
         <Header dictionary={dictionary.header} lang={lang}/>
         <main className="flex-grow">
           {children}
