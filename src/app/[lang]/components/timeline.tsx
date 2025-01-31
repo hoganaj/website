@@ -10,21 +10,29 @@ interface TimelineItem {
 
 const TimelineItem: React.FC<TimelineItem> = ({ year, title, description, image }) => (
   <li>
-    <hr/>
+    <hr className="bg-primary" />
     <div className="timeline-middle">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z" clipRule="evenodd" />
       </svg>
     </div>
     <div className="timeline-start">
-      <Image src={image} alt={title} width={64} height={64} />
+      <Image 
+        src={image} 
+        alt={title} 
+        width={64} 
+        height={64} 
+        className={`${
+          image.includes('UoS') && 'brightness-150'
+        }`}
+      />
     </div>
     <div className="timeline-end mb-10">
       <time className="font-mono italic">{year}</time>
       <div className="text-lg font-black">{title}</div>
       {description}
     </div>
-    <hr/>
+    <hr className="bg-primary" />
   </li>
 );
 
