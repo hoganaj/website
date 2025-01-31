@@ -11,11 +11,11 @@ const POST_QUERY = `*[_type == "post" && slug.current == $slug && language == $l
 
 export async function generateMetadata(props: Params): Promise<Metadata | undefined> {
   const params = await props.params;
-  // const dict = await getDictionary(params.lang);
+  const url = process.env.NEXT_PUBLIC_URL || 'http://localhost:3000';
   const post = await client.fetch<SanityDocument>(POST_QUERY, params, options);
   const postImageUrl = post.image
     ? urlFor(post.image)?.width(1200).height(630).url()
-    : undefined;
+    : `${url}/opengraph-image.png`;
   if (!post) {
     return;
   }

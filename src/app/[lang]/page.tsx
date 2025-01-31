@@ -7,6 +7,7 @@ import type { Metadata } from 'next';
 export async function generateMetadata({params}: { params: Promise<{ lang: 'en' | 'zh' }> }): Promise<Metadata | undefined> {
   const lang = (await params).lang
   const dict = await getDictionary(lang);
+  const url = process.env.NEXT_PUBLIC_URL || 'http://localhost:3000';
   
   return {
     title: dict.metadata.home.title,
@@ -18,6 +19,7 @@ export async function generateMetadata({params}: { params: Promise<{ lang: 'en' 
       locale: lang,
       url: lang === "en" ? "/" : `/${lang}`,
       siteName: "Aidan Hogan",
+      images: `${url}/opengraph-image.png`,
     }
   }
 }
