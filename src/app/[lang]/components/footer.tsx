@@ -51,7 +51,7 @@ const Footer = ({ dictionary, lang }: { dictionary: string; lang: string }) => {
         <a aria-label="Github" href="https://github.com/hoganaj" target="_blank" className="flex items-center">
           <FaGithub size={24} className="fill-current hover:fill-neutral-950" />
         </a>
-        <a aria-label="Linkedin" href="https://www.linkedin.com/in/aidan-hogan-7b378a177/" target="_blank" className="flex items-center">
+        <a aria-label="Linkedin" href="https://www.linkedin.com/in/aidanjhogan/" target="_blank" className="flex items-center">
           <FaLinkedin size={24} className="fill-current hover:fill-blue-600" />
         </a>
       </nav>
