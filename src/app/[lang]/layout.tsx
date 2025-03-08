@@ -32,6 +32,13 @@ export async function generateMetadata(props: { params: Promise<{ lang: "en" | "
       url: lang === "en" ? "/" : `/${lang}`,
       siteName: "Aidan Hogan",
     },
+    alternates: {
+      canonical: `${url}${lang === "en" ? "" : `/${lang}`}`,
+      languages: {
+        'en': `${url}/`,
+        'zh': `${url}/zh`,
+      },
+    },
   };
 }
 
