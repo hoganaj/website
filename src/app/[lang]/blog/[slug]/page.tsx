@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { getDictionary } from "../../dictionaries";
 import type { Metadata } from 'next';
+import { BlogPostJsonLd } from "../../components/JsonLd";
 
 const POST_QUERY = `*[_type == "post" && slug.current == $slug && language == $lang][0]`;
 
@@ -78,6 +79,7 @@ export default async function PostPage(props: Params) {
 
   return (
     <main className="container mx-auto max-w-3xl p-8 flex flex-col gap-4">
+      <BlogPostJsonLd post={post} />
       <Link href="/blog" className="hover:underline">
         {dict.blog.back}
       </Link>
