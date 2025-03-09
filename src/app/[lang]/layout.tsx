@@ -9,6 +9,8 @@ import { notFound } from "next/navigation";
 import i18nConfig from "@/i18nConfig";
 import { PersonJsonLd } from "./components/SEO/JsonLd";
 import BreadcrumbsSeo from "./components/breadcrumbsSeo";
+import { headers } from "next/headers";
+import { NonceProvider } from "./components/NonceProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -51,13 +53,11 @@ export default async function RootLayout(
 ) {
   const params = await props.params;
 
-  const {
-    lang
-  } = params;
+  const { lang } = params;
+  const { children } = props;
+  const headersList = await headers();
 
-  const {
-    children
-  } = props;
+  const nonce = headersList.get('x-nonce') || '';
 
   if (!i18nConfig.locales.includes(lang)) {
     notFound();
@@ -75,17 +75,14 @@ export default async function RootLayout(
         />
       </head>
       <body className={`${inter.className} flex flex-col min-h-screen overflow-x-hidden`} suppressHydrationWarning>
-        <PersonJsonLd />
-        <Header dictionary={dictionary.header} lang={lang}/>
-        <main className="flex-grow">
-          <BreadcrumbsSeo 
-            homeLabel={dictionary.breadcrumbs?.home || "Home"} 
-            labels={dictionary.breadcrumbs?.labels || {}} 
-            lang={lang} 
-          />
-          {children}
-        </main>
-        <Footer dictionary={dictionary.footer} lang={lang}/>
+      <NonceProvider nonce={nonce}>
+          <PersonJsonLd nonce={nonce} />
+          <Header dictionary={dictionary.header} lang={lang} />
+          <main className="flex-grow">
+            {children}
+          </main>
+          <Footer dictionary={dictionary.footer} lang={lang} />
+        </NonceProvider>
       </body>
     </html>
   );

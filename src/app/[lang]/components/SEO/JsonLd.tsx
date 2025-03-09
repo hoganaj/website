@@ -3,10 +3,11 @@
 import React from 'react';
 import { SanityDocument } from 'next-sanity';
 
-export function PersonJsonLd() {
+export function PersonJsonLd({ nonce }: { nonce?: string }) {
   return (
     <script
       type="application/ld+json"
+      nonce={nonce}
       dangerouslySetInnerHTML={{
         __html: JSON.stringify({
           "@context": "https://schema.org",
@@ -28,10 +29,11 @@ export function PersonJsonLd() {
   );
 }
 
-export function BlogPostJsonLd({ post }: { post: SanityDocument  }) {
+export function BlogPostJsonLd({ post, nonce }: { post: SanityDocument; nonce?: string }) {
   return (
     <script
       type="application/ld+json"
+      nonce={nonce}
       dangerouslySetInnerHTML={{
         __html: JSON.stringify({
           "@context": "https://schema.org",
