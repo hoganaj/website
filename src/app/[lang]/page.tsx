@@ -49,7 +49,6 @@ export default async function Home({
           <h1 className="text-3xl md:text-5xl font-bold text-base-content">{dict.home.title}</h1>
         </div>
 
-        {/* Mobile-Friendly Section */}
         <div className="mt-6 flex flex-col items-center gap-3">
           {[
             { icon: <FaLaptopCode />, text: dict.home.job, color: "text-blue-400" },
@@ -68,19 +67,6 @@ export default async function Home({
             </div>
           ))}
         </div>
-
-        {/* Full Code Snippet for Larger Devices
-        <div className="hidden md:block mockup-code w-full max-w-fit mx-auto mt-6 text-left overflow-x-auto">
-          <pre data-prefix="$" className="whitespace-pre text-sm"><code>npm i aidan@latest</code></pre>
-          <pre data-prefix=">" className="text-info whitespace-pre text-sm"><code>Initializing Aidan installation...</code></pre>
-          <pre data-prefix=">" className="text-success whitespace-pre text-sm"><code>Aidan v1.0.0 installed successfully!</code></pre>
-          <pre data-prefix="$" className="whitespace-pre text-sm"><code>aidan --info</code></pre>
-          <pre data-prefix=">" className="whitespace-pre text-sm"><code>Location: Leicester, UK</code></pre>
-          <pre data-prefix=">" className="whitespace-pre text-sm"><code>Occupation: Software Engineer</code></pre>
-          <pre data-prefix=">" className="whitespace-pre text-sm"><code>Skills: ['TypeScript', 'React', 'Node.js'] Hobbies: ['Coding', 'Pickleball', 'Hiking']</code></pre>
-          <pre data-prefix="$" className="whitespace-pre text-sm"><code>aidan --run greet</code></pre>
-          <pre data-prefix=">" className="text-warning whitespace-pre text-sm"><code>Hello, World! Ready to build something awesome?</code></pre>
-        </div> */}
       </div>
     </main>
   );

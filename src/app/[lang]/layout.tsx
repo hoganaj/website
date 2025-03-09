@@ -12,7 +12,7 @@ import BreadcrumbsSeo from "./components/breadcrumbsSeo";
 import { headers } from "next/headers";
 import { NonceProvider } from "./components/NonceProvider";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], display: 'swap'});
 
 export async function generateMetadata(props: { params: Promise<{ lang: "en" | "zh" }> }): Promise<Metadata> {
   const params = await props.params;
@@ -66,23 +66,20 @@ export default async function RootLayout(
 
   return (
     <html lang={lang}>
-      <head>
-        <link
-          rel="preload"
-          href="/avatar.png"
-          as="image"
-          type="image/png"
-        />
-      </head>
       <body className={`${inter.className} flex flex-col min-h-screen overflow-x-hidden`} suppressHydrationWarning>
       <NonceProvider nonce={nonce}>
-          <PersonJsonLd nonce={nonce} />
-          <Header dictionary={dictionary.header} lang={lang} />
-          <main className="flex-grow">
-            {children}
-          </main>
-          <Footer dictionary={dictionary.footer} lang={lang} />
-        </NonceProvider>
+        <PersonJsonLd nonce={nonce} />
+        <Header dictionary={dictionary.header} lang={lang} />
+        <main className="flex-grow">
+          <BreadcrumbsSeo 
+              homeLabel={dictionary.breadcrumbs?.home || "Home"} 
+              labels={dictionary.breadcrumbs?.labels || {}} 
+              lang={lang} 
+           />
+          {children}
+        </main>
+        <Footer dictionary={dictionary.footer} lang={lang} />
+      </NonceProvider>
       </body>
     </html>
   );
