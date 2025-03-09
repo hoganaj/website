@@ -6,9 +6,10 @@ interface TimelineItem {
   title: string;
   description: string;
   image: string;
+  isFirst?: boolean;
 }
 
-const TimelineItem: React.FC<TimelineItem> = ({ year, title, description, image }) => (
+const TimelineItem: React.FC<TimelineItem> = ({ year, title, description, image, isFirst }) => (
   <li>
     <hr className="bg-primary" />
     <div className="timeline-middle">
@@ -19,9 +20,11 @@ const TimelineItem: React.FC<TimelineItem> = ({ year, title, description, image 
     <div className="timeline-start">
       <Image 
         src={image} 
-        alt={title} 
+        alt={`${title} logo`}
         width={64} 
-        height={64} 
+        height={64}
+        sizes="64px"
+        loading={isFirst ? "eager" : "lazy"}
         className={`${
           image.includes('UoS') && 'brightness-150 w-16 h-16'
         }`} 
@@ -62,7 +65,7 @@ const Timeline: React.FC<{ dict: Dictionary }> = ({ dict }) => {
     <div className="max-w-3xl w-full">
       <ul className="timeline timeline-vertical max-md:timeline-compact">
         {experiences.map((exp, index) => (
-          <TimelineItem key={index} {...exp} />
+          <TimelineItem key={index} {...exp} isFirst={index === 0}/>
         ))}
       </ul>
     </div>

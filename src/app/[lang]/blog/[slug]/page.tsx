@@ -88,8 +88,11 @@ export default async function PostPage(props: Params) {
           src={postImageUrl}
           alt={post.title}
           className="aspect-video rounded-xl"
-          width="550"
-          height="310"
+          width={800}
+          height={450}
+          priority
+          sizes="(max-width: 768px) 100vw, 800px"
+          quality={85}
         />
       )}
       <h1 className="text-4xl font-bold mb-8">{post.title}</h1>

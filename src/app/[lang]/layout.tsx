@@ -65,6 +65,14 @@ export default async function RootLayout(
 
   return (
     <html lang={lang}>
+      <head>
+        <link
+          rel="preload"
+          href="/avatar.png"
+          as="image"
+          type="image/png"
+        />
+      </head>
       <body className={`${inter.className} flex flex-col min-h-screen overflow-x-hidden`} suppressHydrationWarning>
         <PersonJsonLd />
         <Header dictionary={dictionary.header} lang={lang}/>

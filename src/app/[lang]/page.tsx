@@ -37,14 +37,15 @@ export default async function Home({
     <main className="container mx-auto px-4 py-6 max-w-4xl">
       <div className="text-center">
         <div className="max-w-sm sm:max-w-md mx-auto">
-          <Image
-            alt="Avatar"
-            src="/avatar.png"
-            priority
-            width={200}
-            height={200}
-            className="mx-auto mb-6 w-32 h-32 sm:w-48 sm:h-48"
-          />
+        <Image
+          alt="Avatar - Aidan Hogan"
+          src="/avatar.png"
+          priority
+          width={200}
+          height={200}
+          className="mx-auto mb-6 w-32 h-32 sm:w-48 sm:h-48"
+          sizes="(max-width: 640px) 128px, 192px"
+        />
           <h1 className="text-3xl md:text-5xl font-bold text-base-content">{dict.home.title}</h1>
         </div>
 
