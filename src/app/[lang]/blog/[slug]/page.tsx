@@ -6,7 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { getDictionary } from "../../dictionaries";
 import type { Metadata } from 'next';
-import { BlogPostJsonLd } from "../../components/JsonLd";
+import { BlogPostJsonLd } from "../../components/SEO/JsonLd";
 import { notFound } from "next/navigation";
 import { FaCalendar, FaClock, FaTag } from "react-icons/fa";
 

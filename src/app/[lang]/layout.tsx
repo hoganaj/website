@@ -7,7 +7,8 @@ import { getDictionary } from "./dictionaries";
 import React from "react";
 import { notFound } from "next/navigation";
 import i18nConfig from "@/i18nConfig";
-import { PersonJsonLd } from "./components/JsonLd";
+import { PersonJsonLd } from "./components/SEO/JsonLd";
+import BreadcrumbsSeo from "./components/breadcrumbsSeo";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -77,6 +78,11 @@ export default async function RootLayout(
         <PersonJsonLd />
         <Header dictionary={dictionary.header} lang={lang}/>
         <main className="flex-grow">
+          <BreadcrumbsSeo 
+            homeLabel={dictionary.breadcrumbs?.home || "Home"} 
+            labels={dictionary.breadcrumbs?.labels || {}} 
+            lang={lang} 
+          />
           {children}
         </main>
         <Footer dictionary={dictionary.footer} lang={lang}/>

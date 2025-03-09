@@ -5,6 +5,16 @@
     "blog": "Blog"
   },
   "footer": "All rights reserved.",
+  "breadcrumbs": {
+    "home": "Home",
+    "about": "About",
+    "blog": "Blog",
+    "labels": {
+      "home": "Home",
+      "about": "About",
+      "blog": "Blog"
+    }
+  },
   "home": {
     "title": "Hey! I'm Aidan",
     "job": "Software Engineer",

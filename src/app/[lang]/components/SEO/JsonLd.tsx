@@ -1,3 +1,7 @@
+'use client';
+
+import React from 'react';
+import { SanityDocument } from 'next-sanity';
 
 export function PersonJsonLd() {
   return (
@@ -24,7 +28,7 @@ export function PersonJsonLd() {
   );
 }
 
-export function BlogPostJsonLd({ post }: { post: any }) {
+export function BlogPostJsonLd({ post }: { post: SanityDocument  }) {
   return (
     <script
       type="application/ld+json"
@@ -34,9 +38,23 @@ export function BlogPostJsonLd({ post }: { post: any }) {
           "@type": "BlogPosting",
           "headline": post.title,
           "datePublished": post.publishedAt,
+          "dateModified": post._updatedAt || post.publishedAt,
           "author": {
             "@type": "Person",
-            "name": "Aidan Hogan"
+            "name": post.author || "Aidan Hogan"
+          },
+          "publisher": {
+            "@type": "Person",
+            "name": "Aidan Hogan",
+            "logo": {
+              "@type": "ImageObject",
+              "url": `${process.env.NEXT_PUBLIC_URL}/avatar.png`
+            }
+          },
+          "description": "Blog post by Aidan Hogan",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": `${process.env.NEXT_PUBLIC_URL}/blog/${post.slug.current}`
           }
         })
       }}

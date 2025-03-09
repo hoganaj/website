@@ -5,6 +5,16 @@
     "blog": "博客"
   },
   "footer": "版权所有。",
+  "breadcrumbs": {
+    "home": "主页",
+    "about": "关于",
+    "blog": "博客",
+    "labels": {
+      "home": "主页",
+      "about": "关于",
+      "blog": "博客"
+    }
+  },
   "home": {
     "title": "嘿！我是Aidan",
     "job": "软件工程师",
