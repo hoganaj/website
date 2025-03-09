@@ -7,7 +7,7 @@ import { getDictionary } from "./dictionaries";
 import React from "react";
 import { notFound } from "next/navigation";
 import i18nConfig from "@/i18nConfig";
-import { PersonJsonLd } from "./components/SEO/JsonLd";
+import { PersonJsonLd, WebsiteSchema } from "./components/SEO/JsonLd";
 import BreadcrumbsSeo from "./components/breadcrumbsSeo";
 import { headers } from "next/headers";
 import { NonceProvider } from "./components/NonceProvider";
@@ -69,6 +69,7 @@ export default async function RootLayout(
       <body className={`${inter.className} flex flex-col min-h-screen overflow-x-hidden`} suppressHydrationWarning>
       <NonceProvider nonce={nonce}>
         <PersonJsonLd nonce={nonce} />
+        <WebsiteSchema nonce={nonce} />
         <Header dictionary={dictionary.header} lang={lang} />
         <main className="flex-grow">
           <BreadcrumbsSeo 

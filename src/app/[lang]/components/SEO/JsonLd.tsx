@@ -3,6 +3,31 @@
 import React from 'react';
 import { SanityDocument } from 'next-sanity';
 
+export function WebsiteSchema({ nonce }: { nonce?: string }) {
+  return (
+    <script
+      type="application/ld+json"
+      nonce={nonce}
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": "Aidan Hogan",
+          "url": process.env.NEXT_PUBLIC_URL,
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": `${process.env.NEXT_PUBLIC_URL}/search?q={search_term_string}`
+            },
+            "query-input": "required name=search_term_string"
+          }
+        })
+      }}
+    />
+  );
+}
+
 export function PersonJsonLd({ nonce }: { nonce?: string }) {
   return (
     <script
