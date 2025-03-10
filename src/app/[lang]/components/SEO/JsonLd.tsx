@@ -1,9 +1,7 @@
-'use client';
-
 import React from 'react';
 import { SanityDocument } from 'next-sanity';
 
-export function WebsiteSchema({ nonce }: { nonce?: string }) {
+export function WebsiteSchema({ nonce, url }: { nonce?: string; url: string }) {
   return (
     <script
       type="application/ld+json"
@@ -13,12 +11,12 @@ export function WebsiteSchema({ nonce }: { nonce?: string }) {
           "@context": "https://schema.org",
           "@type": "WebSite",
           "name": "Aidan Hogan",
-          "url": process.env.NEXT_PUBLIC_URL,
+          "url": url,
           "potentialAction": {
             "@type": "SearchAction",
             "target": {
               "@type": "EntryPoint",
-              "urlTemplate": `${process.env.NEXT_PUBLIC_URL}/search?q={search_term_string}`
+              "urlTemplate": `${url}/search?q={search_term_string}`
             },
             "query-input": "required name=search_term_string"
           }
@@ -28,7 +26,7 @@ export function WebsiteSchema({ nonce }: { nonce?: string }) {
   );
 }
 
-export function PersonJsonLd({ nonce }: { nonce?: string }) {
+export function PersonJsonLd({ nonce, url }: { nonce?: string; url: string }) {
   return (
     <script
       type="application/ld+json"
@@ -38,7 +36,7 @@ export function PersonJsonLd({ nonce }: { nonce?: string }) {
           "@context": "https://schema.org",
           "@type": "Person",
           "name": "Aidan Hogan",
-          "url": process.env.NEXT_PUBLIC_URL,
+          "url": url,
           "jobTitle": "Software Engineer",
           "worksFor": {
             "@type": "Organization",
@@ -54,7 +52,7 @@ export function PersonJsonLd({ nonce }: { nonce?: string }) {
   );
 }
 
-export function BlogPostJsonLd({ post, nonce }: { post: SanityDocument; nonce?: string }) {
+export function BlogPostJsonLd({ post, nonce, url }: { post: SanityDocument; nonce?: string; url: string }) {
   return (
     <script
       type="application/ld+json"
@@ -75,13 +73,13 @@ export function BlogPostJsonLd({ post, nonce }: { post: SanityDocument; nonce?: 
             "name": "Aidan Hogan",
             "logo": {
               "@type": "ImageObject",
-              "url": `${process.env.NEXT_PUBLIC_URL}/avatar.png`
+              "url": `${url}/avatar.png`
             }
           },
           "description": "Blog post by Aidan Hogan",
           "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": `${process.env.NEXT_PUBLIC_URL}/blog/${post.slug.current}`
+            "@id": `${url}/blog/${post.slug.current}`
           }
         })
       }}

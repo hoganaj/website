@@ -110,6 +110,7 @@ export default async function PostPage(props: Params) {
   const lang = params.lang;
   const dict = await getDictionary(lang);
   const post = await client.fetch<SanityDocument>(POST_QUERY, params, options);
+  const url = process.env.NEXT_PUBLIC_URL || 'http://localhost:3000';
 
   if (!post) {
     notFound();
@@ -123,7 +124,7 @@ export default async function PostPage(props: Params) {
 
   return (
     <main className="container mx-auto max-w-3xl p-8 flex flex-col gap-4">
-      <BlogPostJsonLd post={post} />
+      <BlogPostJsonLd post={post} url={url} />
       
       <Link href={lang === 'en' ? '/blog' : `/${lang}/blog`} className="hover:underline flex items-center gap-2">
         {dict.blog.back}

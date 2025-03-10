@@ -58,6 +58,7 @@ export default async function RootLayout(
   const headersList = await headers();
 
   const nonce = headersList.get('x-nonce') || '';
+  const url = process.env.NEXT_PUBLIC_URL || 'http://localhost:3000';
 
   if (!i18nConfig.locales.includes(lang)) {
     notFound();
@@ -68,8 +69,8 @@ export default async function RootLayout(
     <html lang={lang}>
       <body className={`${inter.className} flex flex-col min-h-screen overflow-x-hidden`} suppressHydrationWarning>
       <NonceProvider nonce={nonce}>
-        <PersonJsonLd nonce={nonce} />
-        <WebsiteSchema nonce={nonce} />
+        <PersonJsonLd nonce={nonce} url={url} />
+        <WebsiteSchema nonce={nonce} url={url} />
         <Header dictionary={dictionary.header} lang={lang} />
         <main className="flex-grow">
           <BreadcrumbsSeo 
