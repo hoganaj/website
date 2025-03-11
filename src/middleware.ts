@@ -6,6 +6,14 @@ import { NextRequest } from 'next/server';
 import { generateNonce } from './utils/nonceUtils';
 
 export function middleware(request: NextRequest) {
+
+  const pathname = request.nextUrl.pathname;
+
+  // Skip middleware for studio routes
+  if (pathname.startsWith('/studio')) {
+    return NextResponse.next();
+  }
+
   // Generate a unique nonce for this request
   const nonce = generateNonce();
   
@@ -32,13 +40,6 @@ export function middleware(request: NextRequest) {
   `.replace(/\s{2,}/g, " ").trim();
   
   response.headers.set('Content-Security-Policy', csp);
-  
-  const pathname = request.nextUrl.pathname;
-
-  // Skip middleware for studio routes
-  if (pathname.startsWith('/studio')) {
-    return response;
-  }
 
   // Check if this is a route without a locale prefix
   const pathnameHasLocale = i18nConfig.locales.some(locale => 
