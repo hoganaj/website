@@ -67,7 +67,7 @@ export default async function RootLayout(
 
   return (
     <html lang={lang}>
-      <body className={`${inter.className} flex flex-col min-h-screen overflow-x-hidden`} suppressHydrationWarning>
+      <body className={`${inter.className} flex flex-col min-h-screen h-[100dvh] overflow-x-hidden`} suppressHydrationWarning>
       <NonceProvider nonce={nonce}>
         <PersonJsonLd nonce={nonce} url={url} />
         <WebsiteSchema nonce={nonce} url={url} />

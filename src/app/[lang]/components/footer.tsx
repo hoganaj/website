@@ -33,7 +33,7 @@ const Footer = ({ dictionary, lang }: { dictionary: string; lang: string }) => {
   const buttonLabel = currentLocale === 'en' ? '中文' : 'English';
 
   return (
-    <footer className="flex items-center justify-between px-4 py-4 text-neutral-content">
+    <footer className="flex items-center justify-between px-4 py-3 text-neutral-content">
       <div className="text-sm whitespace-nowrap">
         <p>© {new Date().getFullYear()} - {dictionary}</p>
       </div>
