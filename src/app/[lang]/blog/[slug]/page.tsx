@@ -3,7 +3,6 @@ import imageUrlBuilder from "@sanity/image-url";
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { client } from "@/sanity/lib/client";
 import Link from "next/link";
-import Image from "next/image";
 import { getDictionary } from "../../dictionaries";
 import type { Metadata } from 'next';
 import { BlogPostJsonLd } from "../../components/SEO/JsonLd";
@@ -152,26 +151,17 @@ export default async function PostPage(props: Params) {
           </div>
         )}
       </div>
-      
       {postImageUrl && (
-        <figure className="mb-8">
-          <Image
-            src={postImageUrl}
-            alt={post.title}
-            className="w-full rounded-xl object-cover"
-            width={800}
-            height={450}
-            priority
-            sizes="(max-width: 768px) 100vw, 800px"
-          />
-          {post.mainImage?.alt && (
-            <figcaption className="text-sm text-center mt-2 text-gray-500">
-              {post.mainImage.alt}
-            </figcaption>
-          )}
-        </figure>
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={postImageUrl}
+          alt={post.title}
+          className="aspect-video rounded-xl"
+          width={800}
+          height={450}
+          sizes="(max-width: 768px) 100vw, 800px"
+        />
       )}
-      
       <article className="prose prose-lg max-w-none">
         {Array.isArray(post.body) && <PortableText value={post.body} />}
       </article>
