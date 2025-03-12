@@ -1,4 +1,4 @@
-import type { Metadata, Viewport } from "next";
+import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Footer from "@/app/[lang]/components/footer";
@@ -13,14 +13,6 @@ import { headers } from "next/headers";
 import { NonceProvider } from "./components/NonceProvider";
 
 const inter = Inter({ subsets: ["latin"], display: 'swap'});
-
-export const viewport: Viewport = {
-  width: 'device-width',
-  initialScale: 1,
-  minimumScale: 1,
-  maximumScale: 5,
-  viewportFit: 'cover',
-};
 
 export async function generateMetadata(props: { params: Promise<{ lang: "en" | "zh" }> }): Promise<Metadata> {
   const params = await props.params;
