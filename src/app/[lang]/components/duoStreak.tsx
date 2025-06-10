@@ -25,7 +25,7 @@ async function getDuolingoStreak(username: string): Promise<any>{
     return (
       <div className="inline-block bg-base-200 rounded-box shadow-md p-4">
         <div className="flex items-center">
-          <div className="w-16 h-16 mr-4 flex-shrink-0">
+          <div className="w-16 h-16 mr-4 shrink-0">
             <Image 
               src="/duo.svg" 
               alt="Duolingo owl" 

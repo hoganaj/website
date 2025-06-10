@@ -68,20 +68,20 @@ export default async function RootLayout(
   return (
     <html lang={lang}>
       <body className={`${inter.className} flex flex-col min-h-screen h-[100dvh] overflow-x-hidden`} suppressHydrationWarning>
-      <NonceProvider nonce={nonce}>
-        <PersonJsonLd nonce={nonce} url={url} />
-        <WebsiteSchema nonce={nonce} url={url} />
-        <Header dictionary={dictionary.header} lang={lang} />
-        <main className="flex-grow">
-          <BreadcrumbsSeo 
-              homeLabel={dictionary.breadcrumbs?.home || "Home"} 
-              labels={dictionary.breadcrumbs?.labels || {}} 
-              lang={lang} 
-           />
-          {children}
-        </main>
-        <Footer dictionary={dictionary.footer} lang={lang} />
-      </NonceProvider>
+        <NonceProvider nonce={nonce}>
+          <PersonJsonLd nonce={nonce} url={url} />
+          <WebsiteSchema nonce={nonce} url={url} />
+          <Header dictionary={dictionary.header} lang={lang} />
+          <main className="flex-grow">
+            <BreadcrumbsSeo 
+                homeLabel={dictionary.breadcrumbs?.home || "Home"} 
+                labels={dictionary.breadcrumbs?.labels || {}} 
+                lang={lang} 
+            />
+            {children}
+          </main>
+          <Footer dictionary={dictionary.footer} lang={lang} />
+        </NonceProvider>
       </body>
     </html>
   );

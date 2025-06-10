@@ -62,7 +62,7 @@ export default async function Home({
                         backdrop-blur-lg bg-white/10 border dark:bg-white/5 border-white/20 
                         rounded-lg shadow-lg transition-transform duration-300 hover:scale-105"
             >
-              <span className={`text-2xl flex-shrink-0 ${color}`}>{icon}</span>
+              <span className={`text-2xl shrink-0 ${color}`}>{icon}</span>
               <p className="text-lg text-left text-base-content">{text}</p>
             </div>
           ))}
