@@ -37,21 +37,27 @@ const Footer = ({ dictionary, lang }: { dictionary: string; lang: string }) => {
       <div className="text-sm whitespace-nowrap">
         <p>© {new Date().getFullYear()} - {dictionary}</p>
       </div>
-      <nav className="flex items-center space-x-3">
-      <a
-          onClick={(e) => {
-            e.preventDefault(); // Prevent default anchor behavior
-            handleLangChange(otherLocale);
-          }}
-          href="#"
-          className="footer-title flex items-center hover:text-neutral-950 m-0 cursor-pointer text-sm"
+      <nav className="flex items-center gap-2">
+        <button
+          onClick={() => handleLangChange(otherLocale)}
+          className="inline-flex items-center justify-center h-6 text-sm hover:text-neutral-950 cursor-pointer leading-none"
         >
           {buttonLabel}
-        </a>
-        <a aria-label="Github" href="https://github.com/hoganaj" target="_blank" className="flex items-center">
+        </button>
+        <a 
+          aria-label="Github" 
+          href="https://github.com/hoganaj" 
+          target="_blank" 
+          className="inline-flex items-center justify-center h-6"
+        >
           <FaGithub size={24} className="fill-current hover:fill-neutral-950" />
         </a>
-        <a aria-label="Linkedin" href="https://www.linkedin.com/in/aidanjhogan/" target="_blank" className="flex items-center">
+        <a 
+          aria-label="Linkedin" 
+          href="https://www.linkedin.com/in/aidanjhogan/" 
+          target="_blank" 
+          className="inline-flex items-center justify-center h-6"
+        >
           <FaLinkedin size={24} className="fill-current hover:fill-blue-600" />
         </a>
       </nav>
