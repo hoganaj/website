@@ -44,7 +44,7 @@ const Footer = ({ dictionary, lang }: { dictionary: string; lang: string }) => {
             handleLangChange(otherLocale);
           }}
           href="#"
-          className="footer-title hover:text-neutral-950 m-0 cursor-pointer text-sm"
+          className="footer-title flex items-center hover:text-neutral-950 m-0 cursor-pointer text-sm"
         >
           {buttonLabel}
         </a>
