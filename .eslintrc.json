@@ -1,25 +1,22 @@
 {
-  "extends": [
-    "next/core-web-vitals",
-    "eslint:recommended"
-  ],
+  "extends": ["next/core-web-vitals", "eslint:recommended"],
   "rules": {
     // Error prevention
     "no-console": "warn",
     "no-unused-vars": "error",
     "no-undef": "error",
     "no-unreachable": "error",
-    
+
     // Best practices
     "prefer-const": "error",
     "no-var": "error",
     "eqeqeq": ["error", "always"],
     "curly": ["error", "all"],
-    
+
     // Code style (let Prettier handle most formatting)
     "quotes": ["error", "single", { "avoidEscape": true }],
     "semi": ["error", "always"],
-    
+
     // React specific
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",

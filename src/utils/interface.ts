@@ -1,5 +1,5 @@
 export interface Post {
-  title: string
+  title: string;
   slug: { current: string };
   publishedAt: string;
   body: any;

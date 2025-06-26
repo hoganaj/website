@@ -6,7 +6,6 @@ import { NextRequest } from 'next/server';
 import { generateNonce } from './utils/nonceUtils';
 
 export function middleware(request: NextRequest) {
-
   const pathname = request.nextUrl.pathname;
 
   // Skip middleware for studio routes
@@ -16,10 +15,10 @@ export function middleware(request: NextRequest) {
 
   // Generate a unique nonce for this request
   const nonce = generateNonce();
-  
+
   // Create a response to work with
   const response = NextResponse.next();
-  
+
   // Add the nonce as a header so we can access it in the app
   response.headers.set('x-nonce', nonce);
 
@@ -37,15 +36,17 @@ export function middleware(request: NextRequest) {
     form-action 'self';
     frame-ancestors 'self';
     upgrade-insecure-requests;
-  `.replace(/\s{2,}/g, " ").trim();
-  
+  `
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+
   response.headers.set('Content-Security-Policy', csp);
 
   // Check if this is a route without a locale prefix
-  const pathnameHasLocale = i18nConfig.locales.some(locale => 
-    pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+  const pathnameHasLocale = i18nConfig.locales.some(
+    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   );
-  
+
   // If no locale prefix and not at root, reset to default locale
   if (!pathnameHasLocale && pathname !== '/') {
     const localeCookie = request.cookies.get('NEXT_LOCALE');
@@ -59,11 +60,11 @@ export function middleware(request: NextRequest) {
       return localeResponse;
     }
   }
-  
+
   // Check if we're at root and have a NEXT_LOCALE cookie
   if (pathname === '/') {
     const localeCookie = request.cookies.get('NEXT_LOCALE');
-    
+
     // If we have a non-default locale cookie at root path, reset it to default
     if (localeCookie && localeCookie.value !== i18nConfig.defaultLocale) {
       const rootResponse = NextResponse.redirect(new URL('/', request.url));
@@ -73,7 +74,7 @@ export function middleware(request: NextRequest) {
       return rootResponse;
     }
   }
-  
+
   // Apply i18n routing
   const i18nResponse = i18nRouter(request, i18nConfig);
   // Copy the nonce to the i18n response if we got one
@@ -81,10 +82,10 @@ export function middleware(request: NextRequest) {
     i18nResponse.headers.set('x-nonce', nonce);
     return i18nResponse;
   }
-  
+
   return response;
 }
 
 export const config = {
-  matcher: ['/((?!api|static|_next|_vercel|.*\\..*).*)', '/']
+  matcher: ['/((?!api|static|_next|_vercel|.*\\..*).*)', '/'],
 };

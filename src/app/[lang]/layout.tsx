@@ -1,20 +1,22 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import Footer from "@/app/[lang]/components/footer";
-import Header from "@/app/[lang]/components/header";
-import { getDictionary } from "./dictionaries";
-import React from "react";
-import { notFound } from "next/navigation";
-import i18nConfig from "@/i18nConfig";
-import { PersonJsonLd, WebsiteSchema } from "./components/SEO/JsonLd";
-import BreadcrumbsSeo from "./components/breadcrumbsSeo";
-import { headers } from "next/headers";
-import { NonceProvider } from "./components/NonceProvider";
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+import Footer from '@/app/[lang]/components/footer';
+import Header from '@/app/[lang]/components/header';
+import { getDictionary } from './dictionaries';
+import React from 'react';
+import { notFound } from 'next/navigation';
+import i18nConfig from '@/i18nConfig';
+import { PersonJsonLd, WebsiteSchema } from './components/SEO/JsonLd';
+import BreadcrumbsSeo from './components/breadcrumbsSeo';
+import { headers } from 'next/headers';
+import { NonceProvider } from './components/NonceProvider';
 
-const inter = Inter({ subsets: ["latin"], display: 'swap'});
+const inter = Inter({ subsets: ['latin'], display: 'swap' });
 
-export async function generateMetadata(props: { params: Promise<{ lang: "en" | "zh" }> }): Promise<Metadata> {
+export async function generateMetadata(props: {
+  params: Promise<{ lang: 'en' | 'zh' }>;
+}): Promise<Metadata> {
   const params = await props.params;
   const lang = params.lang;
   const dict = await getDictionary(lang);
@@ -24,22 +26,22 @@ export async function generateMetadata(props: { params: Promise<{ lang: "en" | "
     metadataBase: new URL(url),
     title: {
       default: dict.metadata.layout.title,
-      template: "Aidan Hogan | %s",
+      template: 'Aidan Hogan | %s',
     },
     description: dict.metadata.layout.desc,
     openGraph: {
       title: dict.metadata.layout.title,
       description: dict.metadata.layout.desc,
-      type: "website",
+      type: 'website',
       locale: lang,
-      url: lang === "en" ? "/" : `/${lang}`,
-      siteName: "Aidan Hogan",
+      url: lang === 'en' ? '/' : `/${lang}`,
+      siteName: 'Aidan Hogan',
     },
     alternates: {
-      canonical: `${url}${lang === "en" ? "" : `/${lang}`}`,
+      canonical: `${url}${lang === 'en' ? '' : `/${lang}`}`,
       languages: {
-        'en': `${url}/`,
-        'zh': `${url}/zh`,
+        en: `${url}/`,
+        zh: `${url}/zh`,
       },
     },
   };
@@ -48,7 +50,7 @@ export async function generateMetadata(props: { params: Promise<{ lang: "en" | "
 export default async function RootLayout(
   props: Readonly<{
     children: React.ReactNode;
-    params: { lang: "en" | "zh" };
+    params: { lang: 'en' | 'zh' };
   }>
 ) {
   const params = await props.params;
@@ -67,16 +69,19 @@ export default async function RootLayout(
 
   return (
     <html lang={lang}>
-      <body className={`${inter.className} flex flex-col min-h-screen h-[100dvh] overflow-x-hidden`} suppressHydrationWarning>
+      <body
+        className={`${inter.className} flex flex-col min-h-screen h-[100dvh] overflow-x-hidden`}
+        suppressHydrationWarning
+      >
         <NonceProvider nonce={nonce}>
           <PersonJsonLd nonce={nonce} url={url} />
           <WebsiteSchema nonce={nonce} url={url} />
           <Header dictionary={dictionary.header} lang={lang} />
           <main className="flex-grow">
-            <BreadcrumbsSeo 
-                homeLabel={dictionary.breadcrumbs?.home || "Home"} 
-                labels={dictionary.breadcrumbs?.labels || {}} 
-                lang={lang} 
+            <BreadcrumbsSeo
+              homeLabel={dictionary.breadcrumbs?.home || 'Home'}
+              labels={dictionary.breadcrumbs?.labels || {}}
+              lang={lang}
             />
             {children}
           </main>

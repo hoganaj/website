@@ -55,11 +55,11 @@
   .timeline-compact::before {
     left: 0;
   }
-  
+
   .timeline-compact .timeline-middle {
     left: -0.5rem;
   }
-  
+
   .timeline-compact .timeline-start,
   .timeline-compact .timeline-end {
     left: 1rem;

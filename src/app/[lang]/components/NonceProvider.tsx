@@ -1,4 +1,5 @@
 'use client';
+import { ReactNode } from 'react';
 
 import { createContext, useContext } from 'react';
 
@@ -6,17 +7,15 @@ import { createContext, useContext } from 'react';
 const NonceContext = createContext<string>('');
 
 // Provider component
-export function NonceProvider({ 
-  children, 
-  nonce 
-}: { 
-  children: React.ReactNode; 
+export function NonceProvider({
+  children,
+  nonce,
+}: {
+  children: ReactNode;
   nonce: string;
 }) {
   return (
-    <NonceContext.Provider value={nonce}>
-      {children}
-    </NonceContext.Provider>
+    <NonceContext.Provider value={nonce}>{children}</NonceContext.Provider>
   );
 }
 
