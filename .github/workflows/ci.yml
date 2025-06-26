@@ -51,6 +51,8 @@ jobs:
           echo "✅ Build completed successfully!"
         env:
           NODE_ENV: production
+          NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ vars.NEXT_PUBLIC_SANITY_PROJECT_ID }}
+          NEXT_PUBLIC_SANITY_DATASET: ${{ vars.NEXT_PUBLIC_SANITY_DATASET }}
 
   security:
     name: 'Basic Security'
