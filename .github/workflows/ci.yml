@@ -1,131 +1,60 @@
-# .github/workflows/ci.yml
-
 name: CI Pipeline
 on:
   push:
     branches: [ master, develop ]
-  # Run on pull requests targeting master
   pull_request:
     branches: [ master ]
 
-# Define environment variables available to all jobs
 env:
   NODE_VERSION: '18'
-  CACHE_KEY_PREFIX: 'node-cache'
 
-# Jobs run in parallel unless you specify dependencies
 jobs:
-  # Job 1: Code Quality & Testing
   quality:
-    name: 'Code Quality & Tests'
+    name: 'Code Quality & Build'
     runs-on: ubuntu-latest
     
-    # Define outputs that other jobs can use
-    outputs:
-      cache-hit: ${{ steps.cache.outputs.cache-hit }}
-    
     steps:
-      # Step 1: Download your repository code
       - name: '📥 Checkout repository'
         uses: actions/checkout@v4
-        with:
-          # Fetch full history for better diffs
-          fetch-depth: 0
       
-      # Step 2: Setup Node.js environment
       - name: '⚙️ Setup Node.js ${{ env.NODE_VERSION }}'
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          # Cache npm dependencies automatically
           cache: 'npm'
-          # Optional: specify registry
-          registry-url: 'https://registry.npmjs.org'
       
-      # Step 3: Cache node_modules for faster builds
-      - name: '📦 Cache dependencies'
-        id: cache
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.npm
-            node_modules
-          key: ${{ env.CACHE_KEY_PREFIX }}-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ env.CACHE_KEY_PREFIX }}-${{ runner.os }}-
-      
-      # Step 4: Install dependencies
       - name: '📦 Install dependencies'
-        run: |
-          npm ci --prefer-offline --no-audit
-        env:
-          # Speed up installation
-          HUSKY: 0
+        run: npm ci --prefer-offline --no-audit
       
-      # Step 5: Run ESLint
       - name: '🔍 Run ESLint'
         run: |
           echo "Running ESLint..."
           npm run lint
           echo "✅ ESLint passed!"
-        continue-on-error: false
       
-      # Step 6: Check code formatting
       - name: '💅 Check code formatting'
         run: |
           echo "Checking Prettier formatting..."
           npm run format:check
           echo "✅ Code formatting is correct!"
-        continue-on-error: false
       
-      # Step 7: Type checking
       - name: '🔍 Type checking'
         run: |
-          if [ -f "tsconfig.json" ]; then
-            echo "Running TypeScript type checking..."
-            npx tsc --noEmit
-            echo "✅ Type checking passed!"
-          else
-            echo "No TypeScript config found, skipping type checking"
-          fi
-        continue-on-error: false
+          echo "Running TypeScript type checking..."
+          npm run type-check
+          echo "✅ Type checking passed!"
       
-      # # Step 8: Run tests with coverage - todo - setup tests
-      # - name: '🧪 Run tests'
-      #   run: |
-      #     echo "Running test suite..."
-      #     npm run test:coverage
-      #     echo "✅ All tests passed!"
-      #   env:
-      #     # Ensure tests run in CI mode
-      #     CI: true
-      
-      # Step 9: Build the project
       - name: '🏗️ Build project'
         run: |
           echo "Building project..."
           npm run build
           echo "✅ Build completed successfully!"
         env:
-          # Build optimizations
           NODE_ENV: production
-      
-      # Step 10: Check bundle size
-      - name: '📏 Check bundle size'
-        run: |
-          echo "Analyzing bundle size..."
-          if [ -f "package.json" ] && grep -q "bundlesize" package.json; then
-            npx bundlesize
-          else
-            echo "No bundlesize config found, skipping bundle analysis"
-          fi
-        continue-on-error: true
 
-  # Job 2: Security & Performance
   security:
-    name: 'Security & Performance'
+    name: 'Basic Security'
     runs-on: ubuntu-latest
-    # This job depends on the quality job completing successfully
     needs: quality
     
     steps:
@@ -141,66 +70,9 @@ jobs:
       - name: '📦 Install dependencies'
         run: npm ci --prefer-offline --no-audit
       
-      # Security audit
       - name: '🔒 Security audit'
         run: |
           echo "Running security audit..."
           npm audit --audit-level high
           echo "✅ Security audit completed!"
         continue-on-error: true
-      
-      # Check for outdated dependencies
-      - name: '📅 Check outdated dependencies'
-        run: |
-          echo "Checking for outdated dependencies..."
-          npm outdated || true
-          echo "Outdated dependencies check completed"
-        continue-on-error: true
-      
-      # # Performance testing with Lighthouse CI - to do setup lighthouse
-      # - name: '⚡ Lighthouse CI'
-      #   run: |
-      #     echo "Running Lighthouse CI..."
-      #     npm install -g @lhci/cli
-      #     # You'll need to configure lighthouse in lighthouserc.js
-      #     # lhci autorun
-      #     echo "Lighthouse CI setup required - see documentation"
-      #   continue-on-error: true
-
-  # Job 3: Deploy Preview (only for PRs)
-  deploy-preview:
-    name: 'Deploy Preview'
-    runs-on: ubuntu-latest
-    # Only run on pull requests
-    if: github.event_name == 'pull_request'
-    needs: [quality, security]
-    
-    steps:
-      - name: '📥 Checkout repository'
-        uses: actions/checkout@v4
-      
-      - name: '🚀 Trigger Vercel Preview'
-        run: |
-          echo "Vercel will automatically deploy preview for this PR"
-          echo "Preview URL will be available in PR comments"
-
-  # Job 4: Notify on Success/Failure
-  notify:
-    name: 'Notify Results'
-    runs-on: ubuntu-latest
-    if: always() # Run even if other jobs fail
-    needs: [quality, security]
-    
-    steps:
-      - name: '✅ Success notification'
-        if: ${{ needs.quality.result == 'success' && needs.security.result == 'success' }}
-        run: |
-          echo "🎉 All CI checks passed!"
-          echo "Ready for deployment!"
-      
-      - name: '❌ Failure notification'
-        if: ${{ needs.quality.result == 'failure' || needs.security.result == 'failure' }}
-        run: |
-          echo "💥 CI pipeline failed!"
-          echo "Please check the logs above for details"
-          exit 1
