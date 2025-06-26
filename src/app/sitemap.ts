@@ -1,13 +1,20 @@
-import { client } from "@/sanity/lib/client";
-import { Post } from "@/utils/interface";
-import { MetadataRoute } from "next";
+import { client } from '@/sanity/lib/client';
+import { Post } from '@/utils/interface';
+import { MetadataRoute } from 'next';
 
-type ChangeFrequency = 'always' | 'hourly' | 'daily' | 'weekly' | 'monthly' | 'yearly' | 'never';
+type ChangeFrequency =
+  | 'always'
+  | 'hourly'
+  | 'daily'
+  | 'weekly'
+  | 'monthly'
+  | 'yearly'
+  | 'never';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const url = process.env.NEXT_PUBLIC_URL || 'http://localhost:3000';
 
-  async function getPosts(lang: "en" | "zh") {
+  async function getPosts(lang: 'en' | 'zh') {
     const POSTS_QUERY = `*[
       _type == "post"
       && defined(slug.current)
@@ -18,8 +25,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }
 
   const [enPosts, zhPosts]: [Post[], Post[]] = await Promise.all([
-    getPosts("en"),
-    getPosts("zh"),
+    getPosts('en'),
+    getPosts('zh'),
   ]);
 
   // Static pages with alternates
@@ -31,10 +38,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 1.0,
       alternates: {
         languages: {
-          'en': `${url}/`,
-          'zh': `${url}/zh/`
-        }
-      }
+          en: `${url}/`,
+          zh: `${url}/zh/`,
+        },
+      },
     },
     {
       url: `${url}/about`,
@@ -43,10 +50,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
       alternates: {
         languages: {
-          'en': `${url}/about`,
-          'zh': `${url}/zh/about`
-        }
-      }
+          en: `${url}/about`,
+          zh: `${url}/zh/about`,
+        },
+      },
     },
     {
       url: `${url}/blog`,
@@ -55,19 +62,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
       alternates: {
         languages: {
-          'en': `${url}/blog`,
-          'zh': `${url}/zh/blog`
-        }
-      }
-    }
+          en: `${url}/blog`,
+          zh: `${url}/zh/blog`,
+        },
+      },
+    },
   ];
 
   // Blog posts with alternates when available
-  const blogEntries: MetadataRoute.Sitemap = enPosts.map(post => {
+  const blogEntries: MetadataRoute.Sitemap = enPosts.map((post) => {
     const zhEquivalent = zhPosts.find(
-      zhPost => zhPost.slug.current === post.slug.current
+      (zhPost) => zhPost.slug.current === post.slug.current
     );
-    
+
     return {
       url: `${url}/blog/${post.slug.current}`,
       lastModified: new Date(post._updatedAt || post.publishedAt),
@@ -76,27 +83,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       ...(zhEquivalent && {
         alternates: {
           languages: {
-            'en': `${url}/blog/${post.slug.current}`,
-            'zh': `${url}/zh/blog/${zhEquivalent.slug.current}`
-          }
-        }
-      })
+            en: `${url}/blog/${post.slug.current}`,
+            zh: `${url}/zh/blog/${zhEquivalent.slug.current}`,
+          },
+        },
+      }),
     };
   });
 
   // Chinese blog posts that don't have English equivalents
   const uniqueZhBlogs: MetadataRoute.Sitemap = zhPosts
-    .filter(zhPost => !enPosts.some(enPost => enPost.slug.current === zhPost.slug.current))
-    .map(post => ({
+    .filter(
+      (zhPost) =>
+        !enPosts.some((enPost) => enPost.slug.current === zhPost.slug.current)
+    )
+    .map((post) => ({
       url: `${url}/zh/blog/${post.slug.current}`,
       lastModified: new Date(post._updatedAt || post.publishedAt),
       changeFrequency: 'monthly' as ChangeFrequency,
-      priority: 0.7
+      priority: 0.7,
     }));
 
-  return [
-    ...staticPages,
-    ...blogEntries,
-    ...uniqueZhBlogs
-  ];
+  return [...staticPages, ...blogEntries, ...uniqueZhBlogs];
 }

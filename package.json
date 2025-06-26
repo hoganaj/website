@@ -6,7 +6,12 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "lint:report": "next lint --format json --output-file eslint-report.json",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@sanity/document-internationalization": "^3.3.0",
@@ -31,6 +36,7 @@
     "eslint": "^8",
     "eslint-config-next": "15.1.6",
     "postcss": "^8",
+    "prettier": "^3.0.0",
     "tailwindcss": "^4.1.8",
     "typescript": "^5.8.3"
   }

@@ -1,5 +1,5 @@
-import type { MetadataRoute } from 'next'
- 
+import type { MetadataRoute } from 'next';
+
 export default function robots(): MetadataRoute.Robots {
   const url = process.env.NEXT_PUBLIC_URL || 'http://localhost:3000';
   return {
@@ -9,5 +9,5 @@ export default function robots(): MetadataRoute.Robots {
       disallow: '/studio',
     },
     sitemap: `${url}/sitemap.xml`,
-  }
+  };
 }
