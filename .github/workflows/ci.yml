@@ -44,6 +44,12 @@ jobs:
           npm run type-check
           echo "✅ Type checking passed!"
 
+      - name: '🧪 Run tests'
+        run: |
+          echo "Running Jest tests..."
+          npm test
+          echo "✅ Tests passed!"
+
       - name: '🏗️ Build project'
         run: |
           echo "Building project..."
