@@ -22,6 +22,7 @@ const config: Config = {
     '^server-only$': '<rootDir>/src/__mocks__/server-only.js',
   },
   clearMocks: true,
+  setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
 };
 
 export default config;
