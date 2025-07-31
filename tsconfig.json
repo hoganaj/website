@@ -32,5 +32,5 @@
     "src/i18nConfig.js",
     "src/i18nConfig.js"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "**/*.test.ts"]
 }
