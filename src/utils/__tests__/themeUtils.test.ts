@@ -15,11 +15,6 @@ const documentMock = {
   },
 };
 
-// Store original values
-const originalWindow = global.window;
-const originalDocument = global.document;
-const originalLocalStorage = (global as any).localStorage;
-
 // Mock window and document for Node environment
 Object.defineProperty(global, 'window', {
   value: {
