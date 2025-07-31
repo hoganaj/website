@@ -24,7 +24,7 @@ describe('nonceUtils', () => {
 
     it('should generate nonces of consistent length', () => {
       const nonces = Array.from({ length: 10 }, () => generateNonce());
-      const lengths = nonces.map(n => n.length);
+      const lengths = nonces.map((n) => n.length);
       const uniqueLengths = new Set(lengths);
       // All nonces should have similar length (within 1-2 chars due to base64 padding removal)
       expect(uniqueLengths.size).toBeLessThanOrEqual(2);
@@ -39,10 +39,10 @@ describe('nonceUtils', () => {
         }
         return arr;
       });
-      
+
       Object.defineProperty(crypto, 'getRandomValues', {
         value: mockGetRandomValues,
-        writable: true
+        writable: true,
       });
 
       generateNonce();
@@ -52,7 +52,7 @@ describe('nonceUtils', () => {
       // Restore original implementation
       Object.defineProperty(crypto, 'getRandomValues', {
         value: originalGetRandomValues,
-        writable: true
+        writable: true,
       });
     });
   });

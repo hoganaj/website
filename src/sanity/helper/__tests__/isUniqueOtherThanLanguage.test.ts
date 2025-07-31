@@ -74,15 +74,12 @@ describe('isUniqueOtherThanLanguage', () => {
 
     const result = await isUniqueOtherThanLanguage('another-slug', context);
 
-    expect(mockClient.fetch).toHaveBeenCalledWith(
-      expect.any(String),
-      {
-        draft: 'drafts.test-id',
-        published: 'test-id',
-        language: 'zh',
-        slug: 'another-slug',
-      }
-    );
+    expect(mockClient.fetch).toHaveBeenCalledWith(expect.any(String), {
+      draft: 'drafts.test-id',
+      published: 'test-id',
+      language: 'zh',
+      slug: 'another-slug',
+    });
     expect(result).toBe(false);
   });
 
@@ -138,8 +135,9 @@ describe('isUniqueOtherThanLanguage', () => {
       getClient: mockGetClient,
     } as any;
 
-    await expect(isUniqueOtherThanLanguage('test-slug', context))
-      .rejects.toThrow('Sanity client error');
+    await expect(
+      isUniqueOtherThanLanguage('test-slug', context)
+    ).rejects.toThrow('Sanity client error');
   });
 
   it('should handle different language values', async () => {

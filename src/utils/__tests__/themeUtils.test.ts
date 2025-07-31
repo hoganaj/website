@@ -87,7 +87,7 @@ describe('themeUtils', () => {
     it('should do nothing when window is undefined (SSR)', () => {
       // Clear mocks first
       jest.clearAllMocks();
-      
+
       // Mock server-side environment by setting window to undefined
       Object.defineProperty(global, 'window', {
         value: undefined,
@@ -112,18 +112,24 @@ describe('themeUtils', () => {
       setStoredTheme('dark');
 
       expect(localStorageMock.setItem).toHaveBeenCalledWith('theme', 'dark');
-      expect(documentMock.documentElement.setAttribute).toHaveBeenCalledWith('data-theme', 'dark');
+      expect(documentMock.documentElement.setAttribute).toHaveBeenCalledWith(
+        'data-theme',
+        'dark'
+      );
     });
 
     it('should handle different theme values', () => {
       const themes = ['light', 'dark', 'auto', 'custom-theme'];
 
-      themes.forEach(theme => {
+      themes.forEach((theme) => {
         jest.clearAllMocks();
         setStoredTheme(theme);
 
         expect(localStorageMock.setItem).toHaveBeenCalledWith('theme', theme);
-        expect(documentMock.documentElement.setAttribute).toHaveBeenCalledWith('data-theme', theme);
+        expect(documentMock.documentElement.setAttribute).toHaveBeenCalledWith(
+          'data-theme',
+          theme
+        );
       });
     });
 
@@ -131,7 +137,10 @@ describe('themeUtils', () => {
       setStoredTheme('');
 
       expect(localStorageMock.setItem).toHaveBeenCalledWith('theme', '');
-      expect(documentMock.documentElement.setAttribute).toHaveBeenCalledWith('data-theme', '');
+      expect(documentMock.documentElement.setAttribute).toHaveBeenCalledWith(
+        'data-theme',
+        ''
+      );
     });
   });
 });

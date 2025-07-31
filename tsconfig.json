@@ -32,7 +32,7 @@
     ".next/types/**/*.ts",
     "src/i18nConfig.js",
     "src/i18nConfig.js",
-    "**/*.test.ts",
+    "**/*.test.ts"
   ],
   "exclude": ["node_modules"]
 }
