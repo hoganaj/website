@@ -12,9 +12,9 @@ import type { Metadata } from 'next';
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ lang: 'en' | 'zh' }>;
+  params: Promise<{ lang: string }>;
 }): Promise<Metadata | undefined> {
-  const lang = (await params).lang;
+  const lang = (await params).lang as 'en' | 'zh';
   const dict = await getDictionary(lang);
   const url = process.env.NEXT_PUBLIC_URL || 'http://localhost:3000';
 
@@ -36,9 +36,9 @@ export async function generateMetadata({
 export default async function Home({
   params,
 }: {
-  params: Promise<{ lang: 'en' | 'zh' }>;
+  params: Promise<{ lang: string }>;
 }) {
-  const lang = (await params).lang;
+  const lang = (await params).lang as 'en' | 'zh';
   const dict = await getDictionary(lang);
 
   return (

@@ -7,9 +7,9 @@ import type { Metadata } from 'next';
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ lang: 'en' | 'zh' }>;
+  params: Promise<{ lang: string }>;
 }): Promise<Metadata | undefined> {
-  const lang = (await params).lang;
+  const lang = (await params).lang as 'en' | 'zh';
   const dict = await getDictionary(lang);
   const url = process.env.NEXT_PUBLIC_URL || 'http://localhost:3000';
 
@@ -39,9 +39,9 @@ const options = { next: { revalidate: 30 } };
 export default async function Blog({
   params,
 }: {
-  params: Promise<{ lang: 'en' | 'zh' }>;
+  params: Promise<{ lang: string }>;
 }) {
-  const lang = (await params).lang;
+  const lang = (await params).lang as 'en' | 'zh';
   const dict = await getDictionary(lang);
 
   const posts = await client.fetch<SanityDocument[]>(

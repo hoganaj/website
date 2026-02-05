@@ -15,10 +15,10 @@ import { NonceProvider } from './components/NonceProvider';
 const inter = Inter({ subsets: ['latin'], display: 'swap' });
 
 export async function generateMetadata(props: {
-  params: Promise<{ lang: 'en' | 'zh' }>;
+  params: Promise<{ lang: string }>;
 }): Promise<Metadata> {
   const params = await props.params;
-  const lang = params.lang;
+  const lang = params.lang as 'en' | 'zh';
   const dict = await getDictionary(lang);
   const url = process.env.NEXT_PUBLIC_URL || 'http://localhost:3000';
 
@@ -50,12 +50,12 @@ export async function generateMetadata(props: {
 export default async function RootLayout(
   props: Readonly<{
     children: React.ReactNode;
-    params: { lang: 'en' | 'zh' };
+    params: Promise<{ lang: string }>;
   }>
 ) {
   const params = await props.params;
 
-  const { lang } = params;
+  const lang = params.lang as 'en' | 'zh';
   const { children } = props;
   const headersList = await headers();
 
